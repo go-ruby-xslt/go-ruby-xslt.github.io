@@ -1,0 +1,39 @@
+baseURL = "https://go-ruby-xslt.github.io/"
+title = "go-ruby-xslt"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Stylesheet parsing & compile"
+  status = "ready"
+  blurb = "`xsl:stylesheet` / `xsl:transform` and literal-result-element stylesheets are parsed and compiled once with `ParseString`, ready to apply to any number of source documents."
+[[params.phases]]
+  name = "Template rules & conflict resolution"
+  status = "ready"
+  blurb = "Template rules by `match` / `name` / `priority` / `mode`, resolved by import precedence → priority → document order, with the built-in default templates for every node kind and `xsl:apply-imports`."
+[[params.phases]]
+  name = "Instructions"
+  status = "ready"
+  blurb = "`xsl:apply-templates`, `xsl:call-template`, `xsl:value-of`, `xsl:for-each`, `xsl:if` and `xsl:choose` / `when` / `otherwise` — the full XSLT 1.0 instruction set driving the transform."
+[[params.phases]]
+  name = "Sorting, copy & number"
+  status = "ready"
+  blurb = "`xsl:sort` (data-type, order, multiple keys), `xsl:copy` / `xsl:copy-of` (deep node-set and RTF copy), and `xsl:number` in single / any level with `1`, `01`, `a`, `A`, `i`, `I` formats."
+[[params.phases]]
+  name = "Variables, params & keys"
+  status = "ready"
+  blurb = "`xsl:variable` and `xsl:param` (top-level and local, caller-overridable), `xsl:key` + `key()`, and `xsl:decimal-format` + `format-number()`, resolved through go-ruby-nokogiri's XPath extension seam."
+[[params.phases]]
+  name = "Output methods & serialization"
+  status = "ready"
+  blurb = "Result-element construction (`element` / `attribute` / `text` / `comment` / `processing-instruction`, attribute-value templates) and `xsl:output` — method xml / html / text, indent, doctype, `omit-xml-declaration`, `cdata-section-elements`."
+[[params.phases]]
+  name = "Built on go-ruby-nokogiri XPath 1.0"
+  status = "ready"
+  blurb = "The XPath 1.0 engine is not reimplemented — the processor drives go-ruby-nokogiri's DOM and XPath through its `XPathContext` extension seam: XSLT variable bindings, the XSLT function library, and `current()` semantics."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "Deterministic golden vectors from the XSLT 1.0 spec hold coverage with no Ruby present; a differential oracle against `Nokogiri::XSLT` (libxslt) runs where a new-enough Ruby is available. 100% coverage, gofmt + go vet clean, green across all six 64-bit Go arches and three OSes."
